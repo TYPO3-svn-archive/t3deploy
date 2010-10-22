@@ -96,7 +96,11 @@ class tx_t3deploy_databaseController {
 		$isRemovalEnabled = (isset($arguments['--remove']) || isset($arguments['-r']));
 
 		$result = $this->executeUpdateStructure($arguments);
-
+		if($isRemovalEnabled){
+			$allowKeyModifications = TRUE;
+		}else{
+			$allowKeyModifications = FALSE;
+		}
 		if ($isExcuteEnabled) {
 			$result.= ($result ? PHP_EOL : '') . $this->executeUpdateStructure($arguments, $isRemovalEnabled);
 		}
